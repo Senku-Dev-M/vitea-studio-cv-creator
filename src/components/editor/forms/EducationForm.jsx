@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Trash2, Plus, GraduationCap } from 'lucide-react';
 import AIEnhancer from '../AIEnhancer';
+import { translations } from '../../../data/translations';
 
-export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue }) {
+export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue, lang = 'es' }) {
   const [confirmingDelete, setConfirmingDelete] = useState(null);
 
   const handleDelete = (id) => {
@@ -15,18 +16,21 @@ export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveI
     }
   };
 
+  const t = translations[lang].forms.education;
+  const common = translations[lang].forms;
+
   return (
     <div className="form-section">
       <div className="form-header">
-        <h2>Educación</h2>
-        <p>Añade tus títulos universitarios y certificaciones académicas.</p>
+        <h2>{t.title}</h2>
+        <p>{t.subtitle}</p>
       </div>
 
       {cvData.education.length === 0 ? (
         <div className="empty-state">
           <GraduationCap size={48} className="empty-state-icon" />
-          <p className="empty-state-title">No hay elementos aún</p>
-          <p className="empty-state-desc">Añade tu primera formación académica para comenzar.</p>
+          <p className="empty-state-title">{common.emptyStateTitle}</p>
+          <p className="empty-state-desc">{t.emptyDesc}</p>
         </div>
       ) : (
         cvData.education.map((item, index) => (
@@ -37,7 +41,7 @@ export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveI
                 className="btn-item"
                 onClick={() => onMoveItem('education', index, -1)}
                 disabled={index === 0}
-                aria-label="Mover arriba"
+                aria-label={lang === 'es' ? "Mover arriba" : "Move up"}
               >
                 <ArrowUp size={14} />
               </button>
@@ -46,7 +50,7 @@ export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveI
                 className="btn-item"
                 onClick={() => onMoveItem('education', index, 1)}
                 disabled={index === cvData.education.length - 1}
-                aria-label="Mover abajo"
+                aria-label={lang === 'es' ? "Mover abajo" : "Move down"}
               >
                 <ArrowDown size={14} />
               </button>
@@ -54,95 +58,95 @@ export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveI
                 type="button"
                 className={`btn-item ${confirmingDelete === item.id ? 'confirming' : 'danger'}`}
                 onClick={() => handleDelete(item.id)}
-                aria-label={confirmingDelete === item.id ? 'Confirmar eliminación' : 'Eliminar'}
+                aria-label={confirmingDelete === item.id ? (lang === 'es' ? 'Confirmar eliminación' : 'Confirm delete') : (lang === 'es' ? 'Eliminar' : 'Delete')}
               >
-                {confirmingDelete === item.id ? '¿Confirmar?' : <Trash2 size={14} />}
+                {confirmingDelete === item.id ? common.confirmDelete : <Trash2 size={14} />}
               </button>
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor={`edu-institution-${item.id}`}>Institución</label>
+                <label htmlFor={`edu-school-${item.id}`}>{t.institution}</label>
                 <input
-                  id={`edu-institution-${item.id}`}
+                  id={`edu-school-${item.id}`}
                   type="text"
-                  value={item.institution}
-                  onChange={(e) => onUpdateValue('education', item.id, 'institution', e.target.value)}
-                  placeholder="Ej. Universidad de Chile"
+                  value={item.school || ''}
+                  onChange={(e) => onUpdateValue('education', item.id, 'school', e.target.value)}
+                  placeholder={t.institutionPlaceholder}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor={`edu-degree-${item.id}`}>Título Obtenido</label>
+                <label htmlFor={`edu-degree-${item.id}`}>{t.degree}</label>
                 <input
                   id={`edu-degree-${item.id}`}
                   type="text"
-                  value={item.degree}
+                  value={item.degree || ''}
                   onChange={(e) => onUpdateValue('education', item.id, 'degree', e.target.value)}
-                  placeholder="Ej. Ingeniería"
+                  placeholder={t.degreePlaceholder}
                 />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor={`edu-field-${item.id}`}>Campo de Estudio</label>
+                <label htmlFor={`edu-field-${item.id}`}>{t.field}</label>
                 <input
                   id={`edu-field-${item.id}`}
                   type="text"
-                  value={item.field}
+                  value={item.field || ''}
                   onChange={(e) => onUpdateValue('education', item.id, 'field', e.target.value)}
-                  placeholder="Ej. Tecnologías de la Información"
+                  placeholder={t.fieldPlaceholder}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor={`edu-location-${item.id}`}>Ubicación</label>
+                <label htmlFor={`edu-location-${item.id}`}>{t.location}</label>
                 <input
                   id={`edu-location-${item.id}`}
                   type="text"
-                  value={item.location}
+                  value={item.location || ''}
                   onChange={(e) => onUpdateValue('education', item.id, 'location', e.target.value)}
-                  placeholder="Santiago, Chile"
+                  placeholder={t.locationPlaceholder}
                 />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor={`edu-startDate-${item.id}`}>Fecha de Inicio</label>
+                <label htmlFor={`edu-startDate-${item.id}`}>{t.startDate}</label>
                 <input
                   id={`edu-startDate-${item.id}`}
                   type="text"
-                  value={item.startDate}
-                  onChange={(e) => onUpdateValue('education', item.id, 'startDate', e.target.value)}
-                  placeholder="03/2018"
+                  value={item.start || ''}
+                  onChange={(e) => onUpdateValue('education', item.id, 'start', e.target.value)}
+                  placeholder={t.startDatePlaceholder}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor={`edu-endDate-${item.id}`}>Fecha de Fin</label>
+                <label htmlFor={`edu-endDate-${item.id}`}>{t.endDate}</label>
                 <input
                   id={`edu-endDate-${item.id}`}
                   type="text"
-                  value={item.endDate}
-                  onChange={(e) => onUpdateValue('education', item.id, 'endDate', e.target.value)}
-                  placeholder="12/2022"
+                  value={item.end || ''}
+                  onChange={(e) => onUpdateValue('education', item.id, 'end', e.target.value)}
+                  placeholder={t.endDatePlaceholder}
                 />
               </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor={`edu-description-${item.id}`}>Descripción adicional</label>
+              <label htmlFor={`edu-description-${item.id}`}>{t.description}</label>
               <textarea
                 id={`edu-description-${item.id}`}
                 rows={2}
-                value={item.description}
-                onChange={(e) => onUpdateValue('education', item.id, 'description', e.target.value)}
-                placeholder="Logros académicos, actividades extracurriculares relevantes..."
+                value={item.desc || ''}
+                onChange={(e) => onUpdateValue('education', item.id, 'desc', e.target.value)}
+                placeholder={t.descriptionPlaceholder}
               />
               <AIEnhancer
-                value={item.description}
-                onChange={(val) => onUpdateValue('education', item.id, 'description', val)}
-                fieldName="Descripción adicional de Educación"
-                context={{ degree: item.degree, school: item.institution }}
+                value={item.desc}
+                onChange={(val) => onUpdateValue('education', item.id, 'desc', val)}
+                fieldName={t.description}
+                context={{ degree: item.degree, school: item.school }}
               />
             </div>
           </div>
@@ -154,7 +158,7 @@ export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveI
         className="btn btn-secondary btn-block"
         onClick={() => onAddItem('education')}
       >
-        <Plus size={16} /> Añadir Educación
+        <Plus size={16} /> {t.addBtn}
       </button>
     </div>
   );

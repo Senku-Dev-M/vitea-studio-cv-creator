@@ -30,48 +30,58 @@ const templates = [
   { id: 'elegant', name: 'Elegante', desc: 'Serif refinado con detalles dorados.', category: 'Elegante' }
 ];
 
-function MiniCv({ templateId, scale = 0.25 }) {
+import { translations } from '../data/translations';
+
+function MiniCv({ templateId, scale = 0.25, lang = 'es' }) {
   const data = {
     personal: {
       name: "Alejandro Silva",
-      title: "Desarrollador Full Stack Senior",
+      title: lang === 'es' ? "Desarrollador Full Stack Senior" : "Senior Full Stack Developer",
       email: "alejandro.silva@email.com",
       phone: "+56 9 1234 5678",
       location: "Santiago, Chile",
       website: "alejandrosilva.dev",
-      summary: "Ingeniero de Software con más de 8 años de experiencia especializándose en React, Node.js y arquitectura cloud. Apasionado por crear interfaces intuitivas, código limpio y soluciones de alto rendimiento.",
+      summary: lang === 'es'
+        ? "Ingeniero de Software con más de 8 años de experiencia especializándose en React, Node.js y arquitectura cloud. Apasionado por crear interfaces intuitivas, código limpio y soluciones de alto rendimiento."
+        : "Software Engineer with over 8 years of experience specializing in React, Node.js, and cloud architecture. Passionate about creating intuitive interfaces, clean code, and high-performance solutions.",
       photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&h=150&auto=format&fit=crop"
     },
     experience: [
       {
         id: "exp-1",
-        role: "Líder Técnico Frontend",
+        role: lang === 'es' ? "Líder Técnico Frontend" : "Frontend Technical Lead",
         company: "Tech Solutions",
         location: "Santiago",
         start: "2021",
-        end: "Presente",
-        desc: "Liderazgo de equipo frontend de 5 ingenieros. Migración de plataforma a Next.js y mejora de rendimiento web en un 35%."
+        end: lang === 'es' ? "Presente" : "Present",
+        desc: lang === 'es'
+          ? "Liderazgo de equipo frontend de 5 ingenieros. Migración de plataforma a Next.js y mejora de rendimiento web en un 35%."
+          : "Led a frontend team of 5 engineers. Migrated platform to Next.js and improved web performance by 35%."
       },
       {
         id: "exp-2",
-        role: "Desarrollador Full Stack",
+        role: lang === 'es' ? "Desarrollador Full Stack" : "Full Stack Developer",
         company: "Innovación Digital",
         location: "Valparaíso",
         start: "2018",
         end: "2021",
-        desc: "Desarrollo de API RESTful en Node.js and React. Integración de pagos y optimización de base de datos Postgres."
+        desc: lang === 'es'
+          ? "Desarrollo de API RESTful en Node.js y React. Integración de pagos y optimización de base de datos Postgres."
+          : "Developed RESTful APIs in Node.js and React. Integrated payments and optimized PostgreSQL databases."
       }
     ],
     education: [
       {
         id: "edu-1",
-        degree: "Ingeniería Civil Informática",
+        degree: lang === 'es' ? "Ingeniería Civil Informática" : "B.S. in Computer Science",
         school: "Universidad de Chile",
-        field: "Computación",
+        field: lang === 'es' ? "Computación" : "Computing",
         location: "Santiago",
         start: "2012",
         end: "2017",
-        desc: "Graduado con distinción máxima. Especialidad en sistemas distribuidos."
+        desc: lang === 'es'
+          ? "Graduado con distinción máxima. Especialidad en sistemas distribuidos."
+          : "Graduated with highest honors. Specialized in distributed systems."
       }
     ],
     skills: [
@@ -82,16 +92,18 @@ function MiniCv({ templateId, scale = 0.25 }) {
       { id: "sk-5", name: "AWS & Docker", level: "3" }
     ],
     languages: [
-      { id: "ln-1", name: "Español", level: "Nativo" },
-      { id: "ln-2", name: "Inglés", level: "Avanzado" }
+      { id: "ln-1", name: lang === 'es' ? "Español" : "Spanish", level: lang === 'es' ? "Nativo" : "Native" },
+      { id: "ln-2", name: lang === 'es' ? "Inglés" : "English", level: lang === 'es' ? "Avanzado" : "Advanced" }
     ],
     projects: [
       {
         id: "pr-1",
         name: "Dashboard Analytics",
-        role: "Creador",
+        role: lang === 'es' ? "Creador" : "Creator",
         stack: "React, D3.js, Postgres",
-        desc: "Panel de analíticas SaaS que redujo latencia de reportes en un 40%."
+        desc: lang === 'es'
+          ? "Panel de analíticas SaaS que redujo latencia de reportes en un 40%."
+          : "SaaS analytics dashboard that reduced report latency by 40%."
       }
     ],
     certifications: [
@@ -120,14 +132,14 @@ function MiniCv({ templateId, scale = 0.25 }) {
 
   const summarySection = (
     <section className="cv-section cv-summary-section">
-      <h3 className="cv-section-title">Perfil Profesional</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.profile}</h3>
       <div className="cv-item-desc">{data.personal.summary}</div>
     </section>
   );
 
   const experienceSection = (
     <section className="cv-section cv-experience-section">
-      <h3 className="cv-section-title">Experiencia Laboral</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.experience}</h3>
       <div className="cv-list">
         {data.experience.map(item => (
           <div key={item.id} className="cv-item">
@@ -148,7 +160,7 @@ function MiniCv({ templateId, scale = 0.25 }) {
 
   const educationSection = (
     <section className="cv-section cv-education-section">
-      <h3 className="cv-section-title">Educación</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.education}</h3>
       <div className="cv-list">
         {data.education.map(item => (
           <div key={item.id} className="cv-item">
@@ -169,7 +181,7 @@ function MiniCv({ templateId, scale = 0.25 }) {
 
   const projectsSection = (
     <section className="cv-section cv-projects-section">
-      <h3 className="cv-section-title">Proyectos</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.projects}</h3>
       <div className="cv-list">
         {data.projects.map(item => (
           <div key={item.id} className="cv-item">
@@ -193,7 +205,7 @@ function MiniCv({ templateId, scale = 0.25 }) {
   const useBars = ["visual", "modern", "tech"].includes(templateId);
   const skillsSection = (
     <section className="cv-section cv-skills-section">
-      <h3 className="cv-section-title">Habilidades</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.skills}</h3>
       {useBars ? (
         <div>
           {data.skills.map(item => (
@@ -219,7 +231,7 @@ function MiniCv({ templateId, scale = 0.25 }) {
 
   const languagesSection = (
     <section className="cv-section cv-languages-section">
-      <h3 className="cv-section-title">Idiomas</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.languages}</h3>
       <div className="cv-languages-container">
         {data.languages.map(item => (
           <div key={item.id} className="cv-lang-item">
@@ -233,7 +245,7 @@ function MiniCv({ templateId, scale = 0.25 }) {
 
   const certificationsSection = (
     <section className="cv-section cv-certifications-section">
-      <h3 className="cv-section-title">Certificaciones</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.certifications}</h3>
       <div>
         {data.certifications.map(item => (
           <div key={item.id} className="cv-item cv-cert-item">
@@ -268,7 +280,7 @@ function MiniCv({ templateId, scale = 0.25 }) {
           <div className="cv-col-side">
             {photoHTML}
             <section className="cv-section cv-sidebar-contact">
-              <h3 className="cv-section-title">Contacto</h3>
+              <h3 className="cv-section-title">{translations[lang].cvSections.contact}</h3>
               <div className="cv-contact-info">
                 {contactItems.map((item, idx) => <div key={idx}>{item}</div>)}
               </div>
@@ -349,7 +361,7 @@ function MiniCv({ templateId, scale = 0.25 }) {
 }
 
 
-export default function LandingPage({ onStartCreator }) {
+export default function LandingPage({ onStartCreator, lang = 'es', onLanguageChange }) {
   const currentYear = new Date().getFullYear();
   const [activeTplIndex, setActiveTplIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
@@ -366,6 +378,43 @@ export default function LandingPage({ onStartCreator }) {
   const Rx = isMobile ? 110 : (isTablet ? 220 : 340);
   const Ry = isMobile ? 30 : (isTablet ? 50 : 80);
 
+  const t = translations[lang].landingPage;
+
+  // Dictionary for translating templates array
+  const templateTranslations = {
+    es: {
+      harvard: { name: 'Harvard', desc: 'Diseño clásico serif, ideal para roles tradicionales.', category: 'Clásico' },
+      academic: { name: 'Académico', desc: 'Formato formal para docentes e investigadores.', category: 'Formal' },
+      modern: { name: 'Moderno', desc: 'Columna lateral con diseño contemporáneo.', category: 'Moderno' },
+      minimalist: { name: 'Minimalista', desc: 'Limpio y centrado en el contenido.', category: 'Minimalista' },
+      executive: { name: 'Ejecutivo', desc: 'Corporativo y profesional para directivos.', category: 'Corporativo' },
+      tech: { name: 'Tecnológico', desc: 'Monospace y moderno para desarrolladores.', category: 'Tech' },
+      visual: { name: 'Visual', desc: 'Diseño creativo con barras de progreso.', category: 'Creativo' },
+      functional: { name: 'Funcional', desc: 'Organizado por competencias y habilidades.', category: 'Funcional' },
+      compact: { name: 'Compacto', desc: 'Optimizado para condensar en una sola página.', category: 'Compacto' },
+      elegant: { name: 'Elegante', desc: 'Serif refinado con detalles dorados.', category: 'Elegante' }
+    },
+    en: {
+      harvard: { name: 'Harvard', desc: 'Classic serif design, ideal for traditional roles.', category: 'Classic' },
+      academic: { name: 'Academic', desc: 'Formal format for teachers and researchers.', category: 'Formal' },
+      modern: { name: 'Modern', desc: 'Sidebar layout with contemporary design.', category: 'Modern' },
+      minimalist: { name: 'Minimalist', desc: 'Clean and content-focused.', category: 'Minimalist' },
+      executive: { name: 'Executive', desc: 'Corporate and professional for executives.', category: 'Corporate' },
+      tech: { name: 'Tech', desc: 'Monospace and modern for developers.', category: 'Tech' },
+      visual: { name: 'Visual', desc: 'Creative design with progress bars.', category: 'Creative' },
+      functional: { name: 'Functional', desc: 'Organized by competencies and skills.', category: 'Functional' },
+      compact: { name: 'Compact', desc: 'Optimized to condense into a single page.', category: 'Compact' },
+      elegant: { name: 'Elegant', desc: 'Refined serif with gold details.', category: 'Elegant' }
+    }
+  };
+
+  const translatedTemplates = templates.map(tpl => ({
+    ...tpl,
+    name: templateTranslations[lang][tpl.id].name,
+    desc: templateTranslations[lang][tpl.id].desc,
+    category: templateTranslations[lang][tpl.id].category
+  }));
+
   return (
     <div className="landing-page">
       <nav className="landing-nav" aria-label="Navegación principal">
@@ -377,14 +426,23 @@ export default function LandingPage({ onStartCreator }) {
         </a>
 
         <div className="nav-links">
-          <a href="#templates">Plantillas</a>
-          <a href="#features">Características</a>
+          <a href="#templates">{t.navTemplates}</a>
+          <a href="#features">{t.navFeatures}</a>
+          <button
+            onClick={() => onLanguageChange(lang === 'es' ? 'en' : 'es')}
+            className="btn btn-ghost btn-sm btn-lang-switcher"
+            aria-label="Cambiar idioma"
+            style={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}
+          >
+            <span>🌐</span>
+            <span>{lang === 'es' ? 'ES' : 'EN'}</span>
+          </button>
           <button
             className="btn btn-primary"
             onClick={() => onStartCreator()}
-            aria-label="Crear mi currículum"
+            aria-label={t.ctaStart}
           >
-            Crear mi CV
+            {t.ctaStart}
           </button>
         </div>
       </nav>
@@ -394,18 +452,14 @@ export default function LandingPage({ onStartCreator }) {
           <div className="hero-content">
             <div className="hero-badge">
               <FileCheck size={16} aria-hidden="true" />
-              PLANTILLAS COMPATIBLES CON ATS
+              {t.heroBadge}
             </div>
 
             <h1 className="hero-title">
-              Crea un currículum profesional{" "}
+              {t.heroTitlePrefix}{" "}
               <TextType
                 as="span"
-                text={[
-                  "optimizado para sistemas ATS",
-                  "aprobado por reclutadores",
-                  "con diseño estructurado"
-                ]}
+                text={t.heroAnimText}
                 typingSpeed={60}
                 deletingSpeed={40}
                 pauseDuration={2000}
@@ -415,48 +469,48 @@ export default function LandingPage({ onStartCreator }) {
             </h1>
 
             <p className="hero-subtitle">
-              Editor en tiempo real con plantillas diseñadas bajo estándares de reclutamiento y estructuradas para superar filtros automáticos. Sin registro, sin publicidad y con privacidad total.
+              {t.heroSubtitle}
             </p>
 
             <div className="hero-actions">
               <button
                 className="btn btn-primary btn-lg"
                 onClick={() => onStartCreator()}
-                aria-label="Crear mi currículum"
+                aria-label={t.ctaStart}
               >
-                Crear mi CV
+                {t.ctaStart}
               </button>
               <a
                 href="#templates"
                 className="btn btn-secondary btn-lg"
-                aria-label="Ver plantillas disponibles"
+                aria-label={t.learnMore}
               >
-                Ver plantillas
+                {t.learnMore}
               </a>
             </div>
 
             <p className="hero-trust">
-              10 plantillas profesionales · 100% gratis · Sin registro · Datos 100% privados
+              {t.heroTrust}
             </p>
           </div>
 
           <div className="hero-visual">
             <div className="hero-cv-float">
-              <MiniCv templateId="minimalist" scale={0.35} />
+              <MiniCv templateId="minimalist" scale={0.35} lang={lang} />
             </div>
           </div>
         </section>
 
-        <section id="templates" className="landing-section templates-section" aria-label="Plantillas">
-          <span className="section-label">PLANTILLAS</span>
-          <h2 className="section-title">Diseños profesionales para cada estilo</h2>
+        <section id="templates" className="landing-section templates-section" aria-label={t.navTemplates}>
+          <span className="section-label">{t.secTemplatesLabel}</span>
+          <h2 className="section-title">{t.secTemplatesTitle}</h2>
           <p className="section-subtitle">
-            Elige entre 10 plantillas probadas con sistemas ATS y aprobadas por reclutadores.
+            {t.secTemplatesSubtitle}
           </p>
 
           <div className="templates-carousel-container">
             <div className="templates-carousel">
-              {templates.map((tpl, i) => {
+              {translatedTemplates.map((tpl, i) => {
                 let diff = i - activeTplIndex;
                 if (diff > 5) diff -= 10;
                 if (diff < -5) diff += 10;
@@ -483,7 +537,7 @@ export default function LandingPage({ onStartCreator }) {
                     }}
                   >
                     <div className="template-card-preview">
-                      <MiniCv templateId={tpl.id} scale={0.25} />
+                      <MiniCv templateId={tpl.id} scale={0.25} lang={lang} />
                     </div>
                     <div className="carousel-card-badge">{tpl.category}</div>
                   </div>
@@ -502,14 +556,14 @@ export default function LandingPage({ onStartCreator }) {
               </button>
               
               <div className="carousel-active-info">
-                <h3 className="carousel-active-title">{templates[activeTplIndex].name}</h3>
-                <p className="carousel-active-desc">{templates[activeTplIndex].desc}</p>
+                <h3 className="carousel-active-title">{translatedTemplates[activeTplIndex].name}</h3>
+                <p className="carousel-active-desc">{translatedTemplates[activeTplIndex].desc}</p>
                 <button
                   type="button"
                   className="btn btn-primary btn-lg"
-                  onClick={() => onStartCreator(templates[activeTplIndex].id)}
+                  onClick={() => onStartCreator(translatedTemplates[activeTplIndex].id)}
                 >
-                  Usar plantilla {templates[activeTplIndex].name}
+                  {t.useTemplateBtn} {translatedTemplates[activeTplIndex].name}
                 </button>
               </div>
 
@@ -525,18 +579,18 @@ export default function LandingPage({ onStartCreator }) {
           </div>
         </section>
 
-        <section className="landing-section steps-section" aria-label="Cómo funciona">
-          <span className="section-label">CÓMO FUNCIONA</span>
-          <h2 className="section-title">Tu CV profesional en 3 pasos</h2>
+        <section className="landing-section steps-section" aria-label={t.secStepsLabel}>
+          <span className="section-label">{t.secStepsLabel}</span>
+          <h2 className="section-title">{t.secStepsTitle}</h2>
 
           <div className="steps-grid">
             <div className="step-card">
               <div className="step-number">
                 <LayoutTemplate size={24} aria-hidden="true" />
               </div>
-              <h3 className="step-title">Elige tu plantilla</h3>
+              <h3 className="step-title">{t.step1Title}</h3>
               <p className="step-desc">
-                Selecciona entre 10 diseños profesionales probados con sistemas ATS.
+                {t.step1Desc}
               </p>
             </div>
 
@@ -544,9 +598,9 @@ export default function LandingPage({ onStartCreator }) {
               <div className="step-number">
                 <Edit3 size={24} aria-hidden="true" />
               </div>
-              <h3 className="step-title">Completa tu información</h3>
+              <h3 className="step-title">{t.step2Title}</h3>
               <p className="step-desc">
-                Rellena tus datos con nuestro editor intuitivo con vista previa en tiempo real.
+                {t.step2Desc}
               </p>
             </div>
 
@@ -554,26 +608,26 @@ export default function LandingPage({ onStartCreator }) {
               <div className="step-number">
                 <Download size={24} aria-hidden="true" />
               </div>
-              <h3 className="step-title">Descarga tu CV</h3>
+              <h3 className="step-title">{t.step3Title}</h3>
               <p className="step-desc">
-                Exporta tu currículum como PDF listo para enviar con un solo clic.
+                {t.step3Desc}
               </p>
             </div>
           </div>
         </section>
 
-        <section id="features" className="landing-section" aria-label="Características">
-          <span className="section-label">CARACTERÍSTICAS</span>
-          <h2 className="section-title">Diseñado para el éxito profesional</h2>
+        <section id="features" className="landing-section" aria-label={t.secFeaturesLabel}>
+          <span className="section-label">{t.secFeaturesLabel}</span>
+          <h2 className="section-title">{t.secFeaturesTitle}</h2>
 
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">
                 <Eye size={24} aria-hidden="true" />
               </div>
-              <h3 className="feature-title">Vista previa en tiempo real</h3>
+              <h3 className="feature-title">{t.feat1Title}</h3>
               <p className="feature-desc">
-                Observa cada cambio reflejado instantáneamente en la vista previa de tu CV.
+                {t.feat1Desc}
               </p>
             </div>
 
@@ -581,9 +635,9 @@ export default function LandingPage({ onStartCreator }) {
               <div className="feature-icon">
                 <Shield size={24} aria-hidden="true" />
               </div>
-              <h3 className="feature-title">Privacidad garantizada</h3>
+              <h3 className="feature-title">{t.feat2Title}</h3>
               <p className="feature-desc">
-                Tus datos personales se almacenan exclusivamente en tu navegador. No recopilamos información.
+                {t.feat2Desc}
               </p>
             </div>
 
@@ -591,9 +645,9 @@ export default function LandingPage({ onStartCreator }) {
               <div className="feature-icon">
                 <FileCheck size={24} aria-hidden="true" />
               </div>
-              <h3 className="feature-title">Compatible con ATS</h3>
+              <h3 className="feature-title">{t.feat3Title}</h3>
               <p className="feature-desc">
-                Plantillas optimizadas para pasar los filtros de los sistemas de seguimiento de candidatos.
+                {t.feat3Desc}
               </p>
             </div>
 
@@ -601,9 +655,9 @@ export default function LandingPage({ onStartCreator }) {
               <div className="feature-icon">
                 <Zap size={24} aria-hidden="true" />
               </div>
-              <h3 className="feature-title">Rápido e intuitivo</h3>
+              <h3 className="feature-title">{t.feat4Title}</h3>
               <p className="feature-desc">
-                Genera un CV profesional y listo para descargar en menos de 10 minutos.
+                {t.feat4Desc}
               </p>
             </div>
           </div>
@@ -617,13 +671,13 @@ export default function LandingPage({ onStartCreator }) {
         </div>
 
         <div className="footer-links">
-          <a href="#">Privacidad</a>
-          <a href="#">Términos</a>
-          <a href="#">Contacto</a>
+          <a href="#">{t.footerPrivacy}</a>
+          <a href="#">{t.footerTerms}</a>
+          <a href="#">{t.footerContact}</a>
         </div>
 
         <p className="footer-copy">
-          © {currentYear} Vitae Studio. Todos los derechos reservados.
+          © {currentYear} Vitae Studio. {t.footerCopy}
         </p>
       </footer>
     </div>

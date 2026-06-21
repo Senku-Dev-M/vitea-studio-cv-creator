@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { sampleData } from "../data/sampleData";
 import EditorHeader from "./editor/EditorHeader";
 import LivePreview from "./editor/LivePreview";
+import { translations } from "../data/translations";
 
 // Importar formularios individuales
 import PersonalForm from "./editor/forms/PersonalForm";
@@ -27,7 +28,7 @@ import {
   Eye,
 } from "lucide-react";
 
-export default function CVCreator({ initialTemplate, onBackToLanding }) {
+export default function CVCreator({ initialTemplate, onBackToLanding, lang, onLanguageChange }) {
   // --- ESTADO GLOBAL ---
   const [cvData, setCvData] = useState(() => {
     const saved = localStorage.getItem("cv_creator_draft");
@@ -89,13 +90,13 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
   // --- ACCIONES GENERALES ---
   const handleSaveDraft = () => {
     localStorage.setItem("cv_creator_draft", JSON.stringify(cvData));
-    showToast("¡Borrador guardado con éxito!");
+    showToast(translations[lang].editorHeader.toastSaved);
   };
 
   const handleClearData = () => {
     if (
       window.confirm(
-        "¿Estás seguro de que deseas limpiar toda la información ingresada?",
+        translations[lang].editorHeader.clearConfirm
       )
     ) {
       setCvData({
@@ -117,7 +118,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
         projects: [],
         certifications: [],
         languages: [],
-        custom: { title: "Otros Datos / Intereses", items: [] },
+        custom: { title: lang === "es" ? "Otros Datos / Intereses" : "Other Info / Interests", items: [] },
         settings: {
           template: initialTemplate || "harvard",
           font: "font-default",
@@ -125,7 +126,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           spacing: "space-normal",
         },
       });
-      showToast("Datos borrados");
+      showToast(translations[lang].editorHeader.toastCleared);
     }
   };
 
@@ -142,7 +143,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
-    showToast("Estructura JSON descargada");
+    showToast(translations[lang].editorHeader.toastExported);
   };
 
   const handleImportJSON = (e) => {
@@ -154,12 +155,12 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           const imported = JSON.parse(evt.target.result);
           if (imported.personal && Array.isArray(imported.experience)) {
             setCvData(imported);
-            showToast("Currículum importado correctamente");
+            showToast(translations[lang].editorHeader.toastImported);
           } else {
-            showToast("Error: Formato de archivo JSON no válido", true);
+            showToast(translations[lang].editorHeader.toastImportError, true);
           }
         } catch {
-          showToast("Error al decodificar el archivo JSON", true);
+          showToast(translations[lang].editorHeader.toastDecodeError, true);
         }
       };
       reader.readAsText(file);
@@ -191,16 +192,16 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
       },
     };
 
-    showToast("Generando PDF…");
+    showToast(translations[lang].editorHeader.toastGeneratingPdf);
     html2pdf()
       .set(options)
       .from(element)
       .save()
       .then(() => {
-        showToast("¡PDF descargado!");
+        showToast(translations[lang].editorHeader.toastPdfSuccess);
       })
       .catch(() => {
-        showToast("Error al generar el PDF", true);
+        showToast(translations[lang].editorHeader.toastPdfError, true);
       });
   };
 
@@ -363,25 +364,25 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
 
   // --- DEFINICIÓN DE PESTAÑAS ---
   const tabs = [
-    { id: "personal", label: "Personal", icon: User },
-    { id: "experience", label: "Experiencia", icon: Briefcase },
-    { id: "education", label: "Educación", icon: GraduationCap },
-    { id: "skills", label: "Habilidades", icon: Brain },
-    { id: "projects", label: "Proyectos", icon: FolderGit },
-    { id: "certifications", label: "Certificaciones", icon: Award },
-    { id: "languages", label: "Idiomas", icon: Languages },
-    { id: "custom", label: "Personalizada", icon: FileText },
+    { id: "personal", label: translations[lang].editorTabs.personal, icon: User },
+    { id: "experience", label: translations[lang].editorTabs.experience, icon: Briefcase },
+    { id: "education", label: translations[lang].editorTabs.education, icon: GraduationCap },
+    { id: "skills", label: translations[lang].editorTabs.skills, icon: Brain },
+    { id: "projects", label: translations[lang].editorTabs.projects, icon: FolderGit },
+    { id: "certifications", label: translations[lang].editorTabs.certifications, icon: Award },
+    { id: "languages", label: translations[lang].editorTabs.languages, icon: Languages },
+    { id: "custom", label: translations[lang].editorTabs.custom, icon: FileText },
   ];
 
   // --- ETIQUETAS DE NAVEGACIÓN ---
   const nextLabels = {
-    personal: "Experiencia",
-    experience: "Educación",
-    education: "Habilidades",
-    skills: "Proyectos",
-    projects: "Certificaciones",
-    certifications: "Idiomas",
-    languages: "Personalizada",
+    personal: translations[lang].editorTabs.experience,
+    experience: translations[lang].editorTabs.education,
+    education: translations[lang].editorTabs.skills,
+    skills: translations[lang].editorTabs.projects,
+    projects: translations[lang].editorTabs.certifications,
+    certifications: translations[lang].editorTabs.languages,
+    languages: translations[lang].editorTabs.custom,
     custom: null,
   };
 
@@ -393,6 +394,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           <PersonalForm
             cvData={cvData}
             onPersonalChange={handlePersonalChange}
+            lang={lang}
           />
         );
       case "experience":
@@ -403,6 +405,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
             onDeleteItem={handleDeleteItem}
             onMoveItem={handleMoveItem}
             onUpdateValue={handleUpdateItemValue}
+            lang={lang}
           />
         );
       case "education":
@@ -413,6 +416,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
             onDeleteItem={handleDeleteItem}
             onMoveItem={handleMoveItem}
             onUpdateValue={handleUpdateItemValue}
+            lang={lang}
           />
         );
       case "skills":
@@ -423,6 +427,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
             onDeleteItem={handleDeleteItem}
             onMoveItem={handleMoveItem}
             onUpdateValue={handleUpdateItemValue}
+            lang={lang}
           />
         );
       case "projects":
@@ -433,6 +438,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
             onDeleteItem={handleDeleteItem}
             onMoveItem={handleMoveItem}
             onUpdateValue={handleUpdateItemValue}
+            lang={lang}
           />
         );
       case "certifications":
@@ -443,6 +449,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
             onDeleteItem={handleDeleteItem}
             onMoveItem={handleMoveItem}
             onUpdateValue={handleUpdateItemValue}
+            lang={lang}
           />
         );
       case "languages":
@@ -453,6 +460,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
             onDeleteItem={handleDeleteItem}
             onMoveItem={handleMoveItem}
             onUpdateValue={handleUpdateItemValue}
+            lang={lang}
           />
         );
       case "custom":
@@ -464,6 +472,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
             onMoveItem={handleMoveItem}
             onUpdateValue={handleUpdateItemValue}
             onCustomTitleChange={handleCustomTitleChange}
+            lang={lang}
           />
         );
       default:
@@ -471,6 +480,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           <PersonalForm
             cvData={cvData}
             onPersonalChange={handlePersonalChange}
+            lang={lang}
           />
         );
     }
@@ -488,6 +498,8 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
         onExportJSON={handleExportJSON}
         onImportJSON={handleImportJSON}
         onPrint={handlePrint}
+        lang={lang}
+        onLanguageChange={onLanguageChange}
       />
 
       {/* CUERPO CENTRAL: 2 paneles */}
@@ -532,7 +544,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
               className="btn btn-secondary btn-sm"
               onClick={handleSaveDraft}
             >
-              Guardar Borrador
+              {translations[lang].editorTabs.btnSaveDraft}
             </button>
             {nextLabels[activeTab] && (
               <button
@@ -545,7 +557,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
                     setActiveTab(tabIds[nextIndex]);
                 }}
               >
-                Continuar a {nextLabels[activeTab]}
+                {translations[lang].editorTabs.btnContinue} {nextLabels[activeTab]}
               </button>
             )}
           </div>
@@ -556,6 +568,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           cvData={cvData}
           zoomPercent={zoomPercent}
           setZoomPercent={setZoomPercent}
+          lang={lang}
         />
       </div>
 
@@ -569,7 +582,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           onClick={() => setMobileView('edit')}
         >
           <Edit3 size={16} />
-          <span>Editar</span>
+          <span>{translations[lang].editorHeader.editTab}</span>
         </button>
         <button
           type="button"
@@ -579,7 +592,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           onClick={() => setMobileView('preview')}
         >
           <Eye size={16} />
-          <span>Vista Previa</span>
+          <span>{translations[lang].editorHeader.previewTab}</span>
         </button>
       </div>
 

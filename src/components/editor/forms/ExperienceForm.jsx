@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Trash2, Plus, Briefcase } from 'lucide-react';
 import AIEnhancer from '../AIEnhancer';
+import { translations } from '../../../data/translations';
 
-export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue }) {
+export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue, lang = 'es' }) {
   const [confirmingDelete, setConfirmingDelete] = useState(null);
 
   const handleDelete = (id) => {
@@ -15,18 +16,21 @@ export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMove
     }
   };
 
+  const t = translations[lang].forms.experience;
+  const common = translations[lang].forms;
+
   return (
     <div className="form-section">
       <div className="form-header">
-        <h2>Experiencia Laboral</h2>
-        <p>Añade tus puestos anteriores, responsabilidades y logros clave.</p>
+        <h2>{t.title}</h2>
+        <p>{t.subtitle}</p>
       </div>
 
       {cvData.experience.length === 0 ? (
         <div className="empty-state">
           <Briefcase size={48} className="empty-state-icon" />
-          <p className="empty-state-title">No hay elementos aún</p>
-          <p className="empty-state-desc">Añade tu primera experiencia laboral para comenzar.</p>
+          <p className="empty-state-title">{common.emptyStateTitle}</p>
+          <p className="empty-state-desc">{t.emptyDesc}</p>
         </div>
       ) : (
         cvData.experience.map((item, index) => (
@@ -37,7 +41,7 @@ export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMove
                 className="btn-item"
                 onClick={() => onMoveItem('experience', index, -1)}
                 disabled={index === 0}
-                aria-label="Mover arriba"
+                aria-label={lang === 'es' ? "Mover arriba" : "Move up"}
               >
                 <ArrowUp size={14} />
               </button>
@@ -46,7 +50,7 @@ export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMove
                 className="btn-item"
                 onClick={() => onMoveItem('experience', index, 1)}
                 disabled={index === cvData.experience.length - 1}
-                aria-label="Mover abajo"
+                aria-label={lang === 'es' ? "Mover abajo" : "Move down"}
               >
                 <ArrowDown size={14} />
               </button>
@@ -54,83 +58,83 @@ export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMove
                 type="button"
                 className={`btn-item ${confirmingDelete === item.id ? 'confirming' : 'danger'}`}
                 onClick={() => handleDelete(item.id)}
-                aria-label={confirmingDelete === item.id ? 'Confirmar eliminación' : 'Eliminar'}
+                aria-label={confirmingDelete === item.id ? (lang === 'es' ? 'Confirmar eliminación' : 'Confirm delete') : (lang === 'es' ? 'Eliminar' : 'Delete')}
               >
-                {confirmingDelete === item.id ? '¿Confirmar?' : <Trash2 size={14} />}
+                {confirmingDelete === item.id ? common.confirmDelete : <Trash2 size={14} />}
               </button>
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor={`exp-company-${item.id}`}>Empresa</label>
+                <label htmlFor={`exp-company-${item.id}`}>{t.company}</label>
                 <input
                   id={`exp-company-${item.id}`}
                   type="text"
-                  value={item.company}
+                  value={item.company || ''}
                   onChange={(e) => onUpdateValue('experience', item.id, 'company', e.target.value)}
-                  placeholder="Ej. Google"
+                  placeholder={t.companyPlaceholder}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor={`exp-position-${item.id}`}>Puesto</label>
+                <label htmlFor={`exp-position-${item.id}`}>{t.position}</label>
                 <input
                   id={`exp-position-${item.id}`}
                   type="text"
-                  value={item.position}
-                  onChange={(e) => onUpdateValue('experience', item.id, 'position', e.target.value)}
-                  placeholder="Ej. Senior Developer"
+                  value={item.role || ''}
+                  onChange={(e) => onUpdateValue('experience', item.id, 'role', e.target.value)}
+                  placeholder={t.positionPlaceholder}
                 />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor={`exp-startDate-${item.id}`}>Fecha de Inicio</label>
+                <label htmlFor={`exp-startDate-${item.id}`}>{t.startDate}</label>
                 <input
                   id={`exp-startDate-${item.id}`}
                   type="text"
-                  value={item.startDate}
-                  onChange={(e) => onUpdateValue('experience', item.id, 'startDate', e.target.value)}
-                  placeholder="01/2020"
+                  value={item.start || ''}
+                  onChange={(e) => onUpdateValue('experience', item.id, 'start', e.target.value)}
+                  placeholder={t.startDatePlaceholder}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor={`exp-endDate-${item.id}`}>Fecha de Fin</label>
+                <label htmlFor={`exp-endDate-${item.id}`}>{t.endDate}</label>
                 <input
                   id={`exp-endDate-${item.id}`}
                   type="text"
-                  value={item.endDate}
-                  onChange={(e) => onUpdateValue('experience', item.id, 'endDate', e.target.value)}
-                  placeholder="Presente"
+                  value={item.end || ''}
+                  onChange={(e) => onUpdateValue('experience', item.id, 'end', e.target.value)}
+                  placeholder={t.endDatePlaceholder}
                 />
               </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor={`exp-location-${item.id}`}>Ubicación</label>
+              <label htmlFor={`exp-location-${item.id}`}>{t.location}</label>
               <input
                 id={`exp-location-${item.id}`}
                 type="text"
-                value={item.location}
+                value={item.location || ''}
                 onChange={(e) => onUpdateValue('experience', item.id, 'location', e.target.value)}
-                placeholder="California (Remoto)"
+                placeholder={t.locationPlaceholder}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor={`exp-description-${item.id}`}>Logros y Responsabilidades</label>
+              <label htmlFor={`exp-description-${item.id}`}>{t.description}</label>
               <textarea
                 id={`exp-description-${item.id}`}
                 rows={3}
-                value={item.description}
-                onChange={(e) => onUpdateValue('experience', item.id, 'description', e.target.value)}
-                placeholder="• Describe tus logros principales usando viñetas para mayor claridad..."
+                value={item.desc || ''}
+                onChange={(e) => onUpdateValue('experience', item.id, 'desc', e.target.value)}
+                placeholder={t.descriptionPlaceholder}
               />
               <AIEnhancer
-                value={item.description}
-                onChange={(val) => onUpdateValue('experience', item.id, 'description', val)}
-                fieldName="Logros y Responsabilidades de Experiencia"
-                context={{ role: item.position, company: item.company }}
+                value={item.desc}
+                onChange={(val) => onUpdateValue('experience', item.id, 'desc', val)}
+                fieldName={t.description}
+                context={{ role: item.role, company: item.company }}
               />
             </div>
           </div>
@@ -142,7 +146,7 @@ export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMove
         className="btn btn-secondary btn-block"
         onClick={() => onAddItem('experience')}
       >
-        <Plus size={16} /> Añadir Experiencia
+        <Plus size={16} /> {t.addBtn}
       </button>
     </div>
   );

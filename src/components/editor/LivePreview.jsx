@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Globe, ZoomIn, ZoomOut, Maximize, ExternalLink } from 'lucide-react';
+import { translations } from '../../data/translations';
 
 const formatDisplayUrl = (url) => {
   if (!url) return '';
@@ -13,7 +14,7 @@ const formatDisplayUrl = (url) => {
   return clean;
 };
 
-export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
+export default function LivePreview({ cvData, zoomPercent, setZoomPercent, lang = 'es' }) {
   const [cvHeight, setCvHeight] = useState(1122);
   const cvRef = useRef(null);
   const canvasRef = useRef(null);
@@ -145,23 +146,23 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
   // Secciones del CV
   const summarySection = cvData.personal.summary && (
     <section className="cv-section cv-summary-section">
-      <h3 className="cv-section-title">Perfil Profesional</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.profile}</h3>
       <div className="cv-item-desc">{formatTextToHTML(cvData.personal.summary)}</div>
     </section>
   );
 
   const experienceSection = cvData.experience && cvData.experience.length > 0 && (
     <section className="cv-section cv-experience-section">
-      <h3 className="cv-section-title">Experiencia Laboral</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.experience}</h3>
       <div className="cv-list">
         {cvData.experience.map(item => (item.company || item.role) && (
           <div key={item.id} className="cv-item">
             <div className="cv-item-title-row">
-              <span className="cv-item-title">{item.role || "Cargo"}</span>
+              <span className="cv-item-title">{item.role || (lang === 'es' ? "Cargo" : "Position")}</span>
               <span className="cv-item-date">{item.start || ""} - {item.end || ""}</span>
             </div>
             <div className="cv-item-subtitle-row">
-              <span className="cv-item-subtitle">{item.company || "Empresa"}</span>
+              <span className="cv-item-subtitle">{item.company || (lang === 'es' ? "Empresa" : "Company")}</span>
               <span className="cv-item-location">{item.location || ""}</span>
             </div>
             {item.desc && <div className="cv-item-desc">{formatTextToHTML(item.desc)}</div>}
@@ -173,16 +174,16 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
 
   const educationSection = cvData.education && cvData.education.length > 0 && (
     <section className="cv-section cv-education-section">
-      <h3 className="cv-section-title">Educación</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.education}</h3>
       <div className="cv-list">
         {cvData.education.map(item => (item.school || item.degree) && (
           <div key={item.id} className="cv-item">
             <div className="cv-item-title-row">
-              <span className="cv-item-title">{item.degree || "Título / Certificación"}</span>
+              <span className="cv-item-title">{item.degree || (lang === 'es' ? "Título / Certificación" : "Degree / Qualification")}</span>
               <span className="cv-item-date">{item.start || ""} - {item.end || ""}</span>
             </div>
             <div className="cv-item-subtitle-row">
-              <span className="cv-item-subtitle">{item.school || "Institución"}{item.field ? ` — ${item.field}` : ""}</span>
+              <span className="cv-item-subtitle">{item.school || (lang === 'es' ? "Institución" : "Institution")}{item.field ? ` — ${item.field}` : ""}</span>
               <span className="cv-item-location">{item.location || ""}</span>
             </div>
             {item.desc && <div className="cv-item-desc">{formatTextToHTML(item.desc)}</div>}
@@ -194,7 +195,7 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
 
   const projectsSection = cvData.projects && cvData.projects.length > 0 && (
     <section className="cv-section cv-projects-section">
-      <h3 className="cv-section-title">Proyectos</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.projects}</h3>
       <div className="cv-list">
         {cvData.projects.map(item => item.name && (
           <div key={item.id} className="cv-item">
@@ -227,7 +228,7 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
   const useBars = ["visual", "modern", "tech"].includes(template);
   const skillsSection = cvData.skills && cvData.skills.length > 0 && (
     <section className="cv-section cv-skills-section">
-      <h3 className="cv-section-title">Habilidades</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.skills}</h3>
       {useBars ? (
         <div>
           {cvData.skills.map(item => item.name && (
@@ -253,12 +254,14 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
 
   const languagesSection = cvData.languages && cvData.languages.length > 0 && (
     <section className="cv-section cv-languages-section">
-      <h3 className="cv-section-title">Idiomas</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.languages}</h3>
       <div className="cv-languages-container">
         {cvData.languages.map(item => item.name && (
           <div key={item.id} className="cv-lang-item">
             <span className="cv-lang-name">{item.name}</span>
-            <span className="cv-lang-level">{item.level || ""}</span>
+            <span className="cv-lang-level">
+              {translations[lang].forms.languages.levels[item.level] || item.level || ""}
+            </span>
           </div>
         ))}
       </div>
@@ -267,7 +270,7 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
 
   const certificationsSection = cvData.certifications && cvData.certifications.length > 0 && (
     <section className="cv-section cv-certifications-section">
-      <h3 className="cv-section-title">Certificaciones</h3>
+      <h3 className="cv-section-title">{translations[lang].cvSections.certifications}</h3>
       <div>
         {cvData.certifications.map(item => item.title && (
           <div key={item.id} className="cv-item cv-cert-item">
@@ -284,7 +287,7 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
 
   const customSection = cvData.custom && cvData.custom.items && cvData.custom.items.length > 0 && (
     <section className="cv-section cv-custom-section">
-      <h3 className="cv-section-title">{cvData.custom.title || "Otros Datos"}</h3>
+      <h3 className="cv-section-title">{cvData.custom.title || translations[lang].cvSections.customDefault}</h3>
       <div className="cv-list">
         {cvData.custom.items.map(item => item.title && (
           <div key={item.id} className="cv-item">
@@ -303,7 +306,7 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
       <div className="cv-col-side">
         {photoHTML}
         <section className="cv-section cv-sidebar-contact">
-          <h3 className="cv-section-title">Contacto</h3>
+          <h3 className="cv-section-title">{translations[lang].cvSections.contact}</h3>
           <div className="cv-contact-info">
             {contactItems.map((item, idx) => <div key={idx}>{item}</div>)}
           </div>
@@ -314,8 +317,8 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
       </div>
       <div className="cv-col-main">
         <header className="cv-header-integrated">
-          <h1 className="cv-name">{cvData.personal.name || "Nombre Completo"}</h1>
-          <h2 className="cv-title">{cvData.personal.title || "Tu Profesión"}</h2>
+          <h1 className="cv-name">{cvData.personal.name || (lang === 'es' ? "Nombre Completo" : "Full Name")}</h1>
+          <h2 className="cv-title">{cvData.personal.title || (lang === 'es' ? "Tu Profesión" : "Your Profession")}</h2>
         </header>
         {summarySection}
         {experienceSection}
@@ -329,8 +332,8 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
       <header className="cv-header">
         <div className="cv-header-top">
           <div>
-            <h1 className="cv-name">{cvData.personal.name || "Nombre Completo"}</h1>
-            <h2 className="cv-title">{cvData.personal.title || "Tu Profesión / Especialidad"}</h2>
+            <h1 className="cv-name">{cvData.personal.name || (lang === 'es' ? "Nombre Completo" : "Full Name")}</h1>
+            <h2 className="cv-title">{cvData.personal.title || (lang === 'es' ? "Tu Profesión / Especialidad" : "Your Profession / Specialty")}</h2>
           </div>
           {photoHTML}
         </div>
@@ -385,7 +388,7 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
   );
 
   return (
-    <section className="preview-panel" aria-label="Previsualización del CV">
+    <section className="preview-panel" aria-label={lang === 'es' ? "Previsualización del CV" : "CV Preview"}>
       <div className="preview-canvas" ref={canvasRef}>
         <div
           className="preview-scale-wrapper"
@@ -406,15 +409,15 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
         </div>
       </div>
 
-      <div className="preview-zoom-bar" role="toolbar" aria-label="Controles de zoom">
-        <button onClick={handleZoomOut} aria-label="Disminuir zoom">
+      <div className="preview-zoom-bar" role="toolbar" aria-label={lang === 'es' ? "Controles de zoom" : "Zoom controls"}>
+        <button onClick={handleZoomOut} aria-label={lang === 'es' ? "Disminuir zoom" : "Zoom out"}>
           <ZoomOut size={16} />
         </button>
         <span className="zoom-value">{zoomPercent}%</span>
-        <button onClick={handleZoomIn} aria-label="Aumentar zoom">
+        <button onClick={handleZoomIn} aria-label={lang === 'es' ? "Aumentar zoom" : "Zoom in"}>
           <ZoomIn size={16} />
         </button>
-        <button onClick={handleZoomFit} aria-label="Ajustar al ancho">
+        <button onClick={handleZoomFit} aria-label={lang === 'es' ? "Ajustar al ancho" : "Fit to width"}>
           <Maximize size={16} />
         </button>
       </div>
