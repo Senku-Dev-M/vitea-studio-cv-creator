@@ -1,0 +1,990 @@
+/* ==========================================================================
+   CV CREATOR PREMIUM - TEMPLATES & PRINT STYLES (REACT COMPATIBLE)
+   ========================================================================== */
+
+/* Variables por defecto para el CV */
+.cv-page-a4 {
+    --cv-accent: #2563eb;
+    --cv-text: #1e293b;
+    --cv-text-muted: #64748b;
+    --cv-bg-card: #f8fafc;
+
+    /* Fuentes base */
+    --cv-font-sans: "Inter", sans-serif;
+    --cv-font-serif: "Lora", serif;
+    --cv-font-mono: "JetBrains Mono", monospace;
+
+    /* Valores por defecto */
+    --font-cv-family: var(--cv-font-sans);
+    --cv-base-font-size: 10.5pt;
+
+    --spacing-section: 1.25rem;
+    --spacing-item: 0.75rem;
+    --spacing-title-bottom: 0.4rem;
+
+    /* Tamaño de hoja y márgenes */
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    background-color: #ffffff;
+    color: var(--cv-text);
+    font-size: var(--cv-base-font-size);
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   FUENTES DINÁMICAS (SELECCIONABLES)
+   ========================================================================== */
+.cv-page-a4.font-default {
+    /* Cada plantilla define su propia fuente si está en default */
+}
+.cv-page-a4.font-inter {
+    --font-cv-family: "Inter", sans-serif;
+}
+.cv-page-a4.font-roboto {
+    --font-cv-family: "Roboto", sans-serif;
+}
+.cv-page-a4.font-lora {
+    --font-cv-family: "Lora", serif;
+}
+.cv-page-a4.font-merriweather {
+    --font-cv-family: "Merriweather", serif;
+}
+.cv-page-a4.font-playfair {
+    --font-cv-family: "Playfair Display", serif;
+}
+.cv-page-a4.font-mono {
+    --font-cv-family: "JetBrains Mono", monospace;
+}
+
+.cv-page-a4 {
+    font-family: var(--font-cv-family);
+}
+
+/* ==========================================================================
+   ESPACIADOS DINÁMICOS
+   ========================================================================== */
+.cv-page-a4.space-compact {
+    padding: 12mm 15mm;
+    --spacing-section: 0.75rem;
+    --spacing-item: 0.4rem;
+    --spacing-title-bottom: 0.2rem;
+    line-height: 1.35;
+}
+.cv-page-a4.space-normal {
+    padding: 20mm;
+    --spacing-section: 1.25rem;
+    --spacing-item: 0.85rem;
+    --spacing-title-bottom: 0.4rem;
+    line-height: 1.5;
+}
+.cv-page-a4.space-generous {
+    padding: 25mm;
+    --spacing-section: 1.75rem;
+    --spacing-item: 1.2rem;
+    --spacing-title-bottom: 0.6rem;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   ESTRUCTURA HTML ESTÁNDAR DEL CV
+   ========================================================================== */
+
+/* Header */
+.cv-header {
+    margin-bottom: var(--spacing-section);
+}
+
+.cv-name {
+    font-size: 26pt;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--cv-text);
+    margin-bottom: 0.25rem;
+}
+
+.cv-title {
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--cv-accent);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cv-contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 9pt;
+    color: var(--cv-text-muted);
+}
+
+.cv-contact-info span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.cv-contact-info span i {
+    width: 12px;
+    height: 12px;
+    stroke-width: 2;
+}
+
+/* Layout en dos columnas */
+.cv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* Secciones */
+.cv-section {
+    margin-bottom: var(--spacing-section);
+}
+
+.cv-section-title {
+    font-size: 12pt;
+    font-weight: 600;
+    color: var(--cv-accent);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: var(--spacing-title-bottom);
+    margin-bottom: var(--spacing-item);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Listas de elementos (Experiencia, Educación, Proyectos) */
+.cv-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-item);
+}
+
+.cv-item {
+    page-break-inside: avoid;
+}
+
+.cv-item-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 600;
+    font-size: 10.5pt;
+}
+
+.cv-item-title {
+    color: var(--cv-text);
+}
+
+.cv-item-date {
+    font-size: 9pt;
+    color: var(--cv-text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.cv-item-subtitle-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5pt;
+    color: var(--cv-text-muted);
+    margin-top: 0.05rem;
+    font-style: italic;
+}
+
+.cv-item-subtitle {
+    font-weight: 500;
+}
+
+.cv-item-location {
+    font-size: 9pt;
+}
+
+.cv-item-desc {
+    margin-top: 0.35rem;
+    font-size: 9.5pt;
+    color: var(--cv-text);
+    text-align: justify;
+}
+
+.cv-item-desc ul {
+    padding-left: 1.15rem;
+    margin-top: 0.25rem;
+}
+
+.cv-item-desc li {
+    margin-bottom: 0.15rem;
+}
+
+.cv-item-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+}
+
+.cv-tag {
+    font-size: 8pt;
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-family: var(--cv-font-sans);
+}
+
+/* Habilidades (Skills) */
+.cv-skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.cv-skill-badge {
+    font-size: 9pt;
+    background-color: #f1f5f9;
+    color: var(--cv-text);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.cv-skill-bar-item {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.cv-skill-bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9pt;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+}
+
+.cv-skill-bar-track {
+    width: 100%;
+    height: 6px;
+    background-color: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.cv-skill-bar-fill {
+    height: 100%;
+    background-color: var(--cv-accent);
+    border-radius: 3px;
+}
+
+/* Idiomas */
+.cv-languages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.cv-lang-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5pt;
+}
+
+.cv-lang-name {
+    font-weight: 600;
+}
+
+.cv-lang-level {
+    color: var(--cv-text-muted);
+}
+
+/* Foto de Perfil en CV */
+.cv-photo-container {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--cv-accent);
+    margin-bottom: 1rem;
+}
+
+.cv-photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   PLANTILLA 1: HARVARD (Clásica Serif)
+   ========================================================================== */
+.cv-template-harvard {
+    --font-cv-family: "Merriweather", Georgia, serif;
+    --cv-accent: #000000;
+    --cv-text: #111111;
+    --cv-text-muted: #444444;
+}
+
+.cv-template-harvard .cv-header {
+    text-align: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.cv-template-harvard .cv-name {
+    font-family: "Merriweather", Georgia, serif;
+    font-size: 24pt;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.cv-template-harvard .cv-title {
+    font-size: 11pt;
+    letter-spacing: 0.15em;
+    color: var(--cv-text-muted);
+    margin-top: 0.25rem;
+}
+
+.cv-template-harvard .cv-contact-info {
+    justify-content: center;
+    gap: 1rem;
+    font-size: 8.5pt;
+    margin-top: 0.5rem;
+}
+
+.cv-template-harvard .cv-contact-info i,
+.cv-template-harvard .cv-contact-info svg {
+    display: none !important; /* Sin iconos en Harvard tradicional */
+}
+
+.cv-template-harvard .cv-section-title {
+    border-bottom: 1px solid #222;
+    color: #000000;
+    font-size: 11pt;
+    font-weight: 700;
+    padding-bottom: 0.15rem;
+    margin-top: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.cv-template-harvard .cv-item-title-row {
+    font-size: 10pt;
+}
+
+.cv-template-harvard .cv-item-subtitle-row {
+    font-size: 9.5pt;
+}
+
+.cv-template-harvard .cv-photo-container {
+    display: none !important; /* Harvard no lleva foto */
+}
+
+/* ==========================================================================
+   PLANTILLA 2: ACADEMIC (Formal Lora)
+   ========================================================================== */
+.cv-template-academic {
+    --font-cv-family: "Lora", "Times New Roman", serif;
+    --cv-accent: #1e3a8a; /* Azul marino académico */
+    --cv-text: #1a1a1a;
+    --cv-text-muted: #555555;
+}
+
+.cv-template-academic .cv-header {
+    border-left: 4px solid var(--cv-accent);
+    padding-left: 1rem;
+}
+
+.cv-template-academic .cv-name {
+    font-size: 22pt;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.cv-template-academic .cv-title {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--cv-accent);
+}
+
+.cv-template-academic .cv-section-title {
+    border-bottom: 2px solid var(--cv-accent);
+    color: var(--cv-accent);
+    font-size: 11.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.cv-template-academic .cv-item-title {
+    font-size: 10.5pt;
+}
+
+.cv-template-academic .cv-item-subtitle-row {
+    font-style: normal;
+}
+
+.cv-template-academic .cv-item-subtitle {
+    font-weight: 600;
+    color: var(--cv-text);
+}
+
+.cv-template-academic .cv-photo-container {
+    display: none !important; /* Tradicionalmente no lleva foto */
+}
+
+/* ==========================================================================
+   PLANTILLA 3: MODERN (Columna Lateral)
+   ========================================================================== */
+.cv-template-modern {
+    --font-cv-family: "Roboto", sans-serif;
+    --cv-bg-sidebar: #1e293b; /* Slate 800 */
+    --cv-text-sidebar: #f8fafc;
+    --cv-text-sidebar-muted: #94a3b8;
+    padding: 0 !important; /* Manejado por columnas */
+}
+
+.cv-template-modern .cv-header {
+    display: none; /* El header se integra en las columnas */
+}
+
+.cv-template-modern .cv-grid {
+    grid-template-columns: 32% 68%;
+    gap: 0;
+    min-height: 297mm;
+}
+
+/* Columna Lateral (Izquierda) */
+.cv-template-modern .cv-col-side {
+    background-color: var(--cv-bg-sidebar);
+    color: var(--cv-text-sidebar);
+    padding: 20mm 7mm 20mm 10mm;
+}
+
+.cv-template-modern .cv-col-side .cv-section-title {
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 11pt;
+}
+
+.cv-template-modern .cv-col-side .cv-contact-info {
+    flex-direction: column;
+    gap: 0.6rem;
+    color: var(--cv-text-sidebar-muted);
+}
+
+.cv-template-modern .cv-col-side .cv-contact-info span {
+    color: var(--cv-text-sidebar);
+}
+
+.cv-template-modern .cv-col-side .cv-contact-info span i,
+.cv-template-modern .cv-col-side .cv-contact-info span svg {
+    color: var(--cv-accent) !important;
+}
+
+.cv-template-modern .cv-skill-badge {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.cv-template-modern .cv-lang-item {
+    color: #ffffff;
+}
+.cv-template-modern .cv-lang-level {
+    color: var(--cv-text-sidebar-muted);
+}
+
+.cv-template-modern .cv-photo-container {
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--cv-accent);
+    margin-bottom: 1.5rem;
+}
+
+/* Columna Principal (Derecha) */
+.cv-template-modern .cv-col-main {
+    background-color: #ffffff;
+    padding: 20mm 15mm 20mm 10mm;
+}
+
+.cv-template-modern .cv-col-main .cv-name {
+    font-size: 24pt;
+    color: #0f172a;
+}
+
+.cv-template-modern .cv-col-main .cv-title {
+    font-size: 12pt;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   PLANTILLA 4: MINIMALIST (Limpio Inter)
+   ========================================================================== */
+.cv-template-minimalist {
+    --font-cv-family: "Inter", sans-serif;
+    --cv-accent: #475569; /* Slate 600 */
+    --cv-text: #1e293b;
+    --cv-text-muted: #64748b;
+    padding: 18mm;
+}
+
+.cv-template-minimalist .cv-name {
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    font-size: 28pt;
+}
+
+.cv-template-minimalist .cv-title {
+    font-weight: 600;
+    font-size: 10.5pt;
+    letter-spacing: 0.1em;
+    color: #0f172a;
+}
+
+.cv-template-minimalist .cv-contact-info {
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.5rem 0;
+    margin-top: 0.75rem;
+    justify-content: space-between;
+}
+
+.cv-template-minimalist .cv-section {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 1rem;
+}
+
+.cv-template-minimalist .cv-section-title {
+    border-bottom: none;
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #0f172a;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    letter-spacing: 0.08em;
+}
+
+.cv-template-minimalist .cv-section-content {
+    grid-column: 2;
+}
+
+.cv-template-minimalist .cv-item-title-row {
+    font-size: 10pt;
+}
+
+.cv-template-minimalist .cv-photo-container {
+    display: none !important;
+}
+
+/* ==========================================================================
+   PLANTILLA 5: EXECUTIVE (Corporativo Roboto)
+   ========================================================================== */
+.cv-template-executive {
+    --font-cv-family: "Roboto", sans-serif;
+    --cv-accent: #0f172a; /* Slate 900 */
+    --cv-text: #1e293b;
+    --cv-text-muted: #475569;
+}
+
+.cv-template-executive .cv-header {
+    border-bottom: 3px double var(--cv-accent);
+    padding-bottom: 0.75rem;
+}
+
+.cv-template-executive .cv-name {
+    font-size: 24pt;
+    color: var(--cv-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.cv-template-executive .cv-title {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--cv-text-muted);
+}
+
+.cv-template-executive .cv-contact-info {
+    justify-content: flex-start;
+    gap: 1.25rem;
+    font-size: 8.5pt;
+}
+
+.cv-template-executive .cv-section-title {
+    border-bottom: none;
+    background-color: #f1f5f9;
+    padding: 0.35rem 0.5rem;
+    color: var(--cv-accent);
+    font-weight: 700;
+    font-size: 10.5pt;
+}
+
+.cv-template-executive .cv-summary-section {
+    background-color: #f8fafc;
+    border-left: 3px solid var(--cv-accent);
+    padding: 0.75rem 1rem;
+}
+.cv-template-executive .cv-summary-section .cv-section-title {
+    background: none;
+    padding: 0 0 0.25rem 0;
+}
+
+.cv-template-executive .cv-photo-container {
+    float: right;
+    width: 90px;
+    height: 90px;
+    border-radius: var(--radius-sm);
+    margin-left: 1.5rem;
+    border: 1px solid #cbd5e1;
+}
+
+/* ==========================================================================
+   PLANTILLA 6: TECHNOLOGICAL (Dev Monospace)
+   ========================================================================== */
+.cv-template-tech {
+    --font-cv-family: "Inter", sans-serif;
+    --cv-accent: #10b981; /* Verde esmeralda tech */
+    --cv-text: #0f172a;
+    --cv-text-muted: #475569;
+}
+
+.cv-template-tech .cv-name {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 22pt;
+}
+
+.cv-template-tech .cv-title {
+    font-family: "JetBrains Mono", monospace;
+    background-color: #0f172a;
+    color: #ffffff;
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    font-size: 9.5pt;
+    border-radius: 4px;
+    letter-spacing: 0;
+}
+
+.cv-template-tech .cv-contact-info span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+}
+
+.cv-template-tech .cv-section-title {
+    font-family: "JetBrains Mono", monospace;
+    border-bottom: 2px dashed #cbd5e1;
+    color: #0f172a;
+    font-size: 11pt;
+}
+
+.cv-template-tech .cv-item-title {
+    font-weight: 700;
+}
+
+.cv-template-tech .cv-item-date {
+    font-family: "JetBrains Mono", monospace;
+    background-color: #f1f5f9;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+}
+
+.cv-template-tech .cv-tag {
+    font-family: "JetBrains Mono", monospace;
+    background-color: #0f172a;
+    color: var(--cv-accent);
+    font-weight: 500;
+}
+
+.cv-template-tech .cv-photo-container {
+    width: 90px;
+    height: 90px;
+    border-radius: var(--radius-sm);
+    border: 2px solid #0f172a;
+}
+
+/* ==========================================================================
+   PLANTILLA 7: VISUAL / CREATIVE (Con Progreso)
+   ========================================================================== */
+.cv-template-visual {
+    --font-cv-family: "Fira Sans", sans-serif;
+    --cv-accent: #ec4899; /* Rosa creativo */
+    --cv-text: #334155;
+    --cv-text-muted: #64748b;
+    padding: 0 !important;
+}
+
+.cv-template-visual .cv-header {
+    display: none;
+}
+
+.cv-template-visual .cv-grid {
+    grid-template-columns: 35% 65%;
+    gap: 0;
+    min-height: 297mm;
+}
+
+.cv-template-visual .cv-col-side {
+    background-color: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+    padding: 20mm 8mm;
+}
+
+.cv-template-visual .cv-col-side .cv-section-title {
+    border-bottom: 2px solid var(--cv-accent);
+}
+
+.cv-template-visual .cv-photo-container {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-lg);
+    border: 3px solid var(--cv-accent);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.cv-template-visual .cv-col-main {
+    background-color: #ffffff;
+    padding: 20mm 12mm;
+}
+
+.cv-template-visual .cv-name {
+    font-size: 26pt;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--cv-accent), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.cv-template-visual .cv-section-title {
+    color: #0f172a;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* ==========================================================================
+   PLANTILLA 8: FUNCTIONAL (Por Competencias)
+   ========================================================================== */
+.cv-template-functional {
+    --font-cv-family: "Inter", sans-serif;
+    --cv-accent: #0284c7; /* Azul */
+    --cv-text: #1e293b;
+    --cv-text-muted: #64748b;
+}
+
+.cv-template-functional .cv-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.cv-template-functional .cv-col-side {
+    order: -1;
+    margin-bottom: 1rem;
+}
+
+.cv-template-functional .cv-col-side .cv-skills-section {
+    margin-bottom: var(--spacing-section);
+}
+
+.cv-template-functional .cv-col-side .cv-skills-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+/* ==========================================================================
+   PLANTILLA 9: COMPACT (Una Página)
+   ========================================================================== */
+.cv-template-compact {
+    --font-cv-family: "Roboto", sans-serif;
+    --cv-accent: #475569;
+    --cv-text: #0f172a;
+    --cv-text-muted: #475569;
+    padding: 10mm 12mm !important;
+    --spacing-section: 0.6rem;
+    --spacing-item: 0.35rem;
+    --spacing-title-bottom: 0.15rem;
+    line-height: 1.3;
+}
+
+.cv-template-compact .cv-name {
+    font-size: 20pt;
+    font-weight: 700;
+}
+
+.cv-template-compact .cv-title {
+    font-size: 10pt;
+    margin-bottom: 0.25rem;
+}
+
+.cv-template-compact .cv-contact-info {
+    gap: 0.6rem;
+    font-size: 8pt;
+}
+
+.cv-template-compact .cv-section-title {
+    font-size: 9.5pt;
+    border-bottom: 1.5px solid var(--cv-accent);
+}
+
+.cv-template-compact .cv-item-title-row {
+    font-size: 9pt;
+}
+
+.cv-template-compact .cv-item-subtitle-row {
+    font-size: 8.5pt;
+}
+
+.cv-template-compact .cv-item-desc {
+    font-size: 8.5pt;
+    margin-top: 0.15rem;
+}
+
+.cv-template-compact .cv-photo-container {
+    width: 60px;
+    height: 60px;
+    float: right;
+    margin-bottom: 0;
+    margin-left: 1rem;
+}
+
+/* ==========================================================================
+   PLANTILLA 10: ELEGANT (Playfair Serif)
+   ========================================================================== */
+.cv-template-elegant {
+    --font-cv-family: "Lora", serif;
+    --cv-accent: #b45309; /* Color dorado */
+    --cv-text: #27272a;
+    --cv-text-muted: #71717a;
+}
+
+.cv-template-elegant .cv-name {
+    font-family: "Playfair Display", serif;
+    font-size: 28pt;
+    font-weight: 600;
+    color: #18181b;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.cv-template-elegant .cv-title {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: 12pt;
+    text-transform: none;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: var(--cv-accent);
+    margin-bottom: 1rem;
+}
+
+.cv-template-elegant .cv-contact-info {
+    justify-content: center;
+    border-top: 1px solid #e4e4e7;
+    border-bottom: 1px solid #e4e4e7;
+    padding: 0.5rem;
+    font-size: 8.5pt;
+}
+
+.cv-template-elegant .cv-section-title {
+    font-family: "Playfair Display", serif;
+    text-align: center;
+    border-bottom: none;
+    position: relative;
+    text-transform: none;
+    font-size: 13pt;
+    font-weight: 600;
+    color: #18181b;
+}
+
+.cv-template-elegant .cv-section-title::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 1px;
+    background-color: var(--cv-accent);
+    margin: 0.25rem auto 0 auto;
+}
+
+.cv-template-elegant .cv-item-title {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+}
+
+.cv-template-elegant .cv-photo-container {
+    display: none !important;
+}
+
+/* ==========================================================================
+   ESTILOS DE IMPRESIÓN (PDF)
+   ========================================================================== */
+@media print {
+    body {
+        background-color: #ffffff !important;
+        background-image: none !important;
+        color: #000000 !important;
+        overflow: visible !important;
+        height: auto !important;
+        font-size: 10pt;
+    }
+
+    /* The CV header (name, title, contact info) must always be visible */
+    header.cv-header {
+        display: block !important;
+    }
+
+    /* CV page layout */
+    .cv-page-a4 {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        height: auto !important;
+        min-height: 0 !important;
+        background-color: #ffffff !important;
+        page-break-after: avoid;
+        page-break-inside: auto;
+    }
+
+    .cv-section {
+        page-break-inside: avoid;
+    }
+
+    .cv-item {
+        page-break-inside: avoid;
+    }
+
+    /* Force color printing for skill bars */
+    .cv-skill-bar-track {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background-color: #e2e8f0 !important;
+    }
+
+    .cv-skill-bar-fill {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background-color: var(--cv-accent) !important;
+    }
+
+    /* Preserve background colors for sidebar templates */
+    .cv-template-modern .cv-col-side {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background-color: var(--cv-bg-sidebar) !important;
+    }
+
+    .cv-template-visual .cv-col-side {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background-color: #f8fafc !important;
+    }
+
+    /* Preserve accent colors for section decorators */
+    .cv-section-title::after,
+    .cv-template-tech .cv-title,
+    .cv-template-tech .cv-tag,
+    .cv-template-executive .cv-section-title {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

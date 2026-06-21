@@ -1,0 +1,166 @@
+{
+  "personal": {
+    "name": "Sofía Valentina Ramírez Castro",
+    "title": "Gerente de Ingeniería de Software & Arquitecta Cloud",
+    "email": "sofia.ramirez@techmail.com",
+    "phone": "+56 9 9876 5432",
+    "location": "Santiago, Chile",
+    "website": "https://sofiaramirez.dev",
+    "linkedin": "linkedin.com/in/sofia-ramirez-dev",
+    "github": "github.com/sofia-architect",
+    "photo": "",
+    "summary": "Ingeniera de Software y Arquitecta de Soluciones Cloud con más de 10 años de experiencia liderando la transformación digital y migración a la nube en el sector fintech y retail. Experta en diseño de arquitecturas de alta disponibilidad basadas en microservicios, Kubernetes y AWS/GCP. Apasionada por formar equipos técnicos diversos y de alto rendimiento bajo metodologías ágiles a escala (Safe, Scrum). Mentora técnica activa en comunidades locales de mujeres en STEM."
+  },
+  "experience": [
+    {
+      "id": "exp-test-1",
+      "company": "Banco Digital del Pacífico",
+      "role": "Gerente de Ingeniería / Tech Lead Manager",
+      "location": "Santiago, Chile (Híbrido)",
+      "start": "01/2023",
+      "end": "Presente",
+      "desc": "• Lidero 3 células ágiles de ingeniería (18 desarrolladores) a cargo de la modernización de los sistemas core de pagos, procesando más de 2 millones de transacciones diarias.\n• Dirigí la migración de aplicaciones legadas a una arquitectura nativa en la nube usando AWS (EKS, RDS, MSK), logrando una reducción del 30% en costos de infraestructura y aumentando la disponibilidad al 99.99%.\n• Diseñé e implementé la estrategia de capacitación interna en AWS, logrando que el 80% de mi equipo obtuviera certificaciones oficiales."
+    },
+    {
+      "id": "exp-test-2",
+      "company": "MegaRetail Solutions",
+      "role": "Arquitecta de Software Cloud Principal",
+      "location": "Remoto (Latinoamérica)",
+      "start": "06/2020",
+      "end": "12/2022",
+      "desc": "• Diseñé la arquitectura del nuevo motor de recomendaciones y motor de búsqueda para el e-commerce, incrementando la tasa de conversión de ventas en un 18%.\n• Definí las políticas globales de seguridad e Infraestructura como Código (IaC) con Terraform y Ansible en entornos multicloud (AWS y Google Cloud).\n• Lideré la respuesta a incidentes críticos, mejorando el MTTR (Tiempo Medio de Recuperación) en un 55% a través de la implementación de prácticas Site Reliability Engineering (SRE) con Prometheus, Grafana y Datadog."
+    },
+    {
+      "id": "exp-test-3",
+      "company": "StartUp Innova Coder",
+      "role": "Desarrolladora Full-Stack Senior",
+      "location": "Santiago, Chile",
+      "start": "03/2017",
+      "end": "05/2020",
+      "desc": "• Construí desde cero plataformas de reserva en tiempo real con React, Redux, Node.js y MongoDB, con escalamiento automático en Docker Swarm.\n• Implementé integraciones de pasarelas de pago locales (Webpay, MercadoPago) e internacionales (Stripe).\n• Configuré y administré flujos de integración continua (CI/CD) en Jenkins y GitHub Actions, acortando el ciclo de entrega de software de 2 semanas a despliegues diarios."
+    },
+    {
+      "id": "exp-test-4",
+      "company": "Consultores de Software Limitada",
+      "role": "Desarrolladora Web",
+      "location": "Santiago, Chile",
+      "start": "01/2015",
+      "end": "02/2017",
+      "desc": "• Desarrollé aplicaciones empresariales internas para clientes del área de minería y seguros utilizando Angular, .NET Core y SQL Server.\n• Optimicé consultas SQL lentas reduciendo tiempos de carga de reportes financieros complejos de 40 segundos a menos de 5 segundos.\n• Documenté el 100% de las APIs RESTful internas usando Swagger/OpenAPI, reduciendo el tiempo de integración de nuevos desarrolladores."
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-test-1",
+      "school": "Universidad de Chile",
+      "degree": "Magíster en Tecnologías de la Información",
+      "field": "Gestión de TI y Ciberseguridad",
+      "location": "Santiago, Chile",
+      "start": "2018",
+      "end": "2020",
+      "desc": "Graduada con Honores Académicos. Tesis enfocada en arquitecturas seguras tolerantes a fallos en banca en la nube."
+    },
+    {
+      "id": "edu-test-2",
+      "school": "Universidad de Santiago de Chile",
+      "degree": "Ingeniería Civil en Informática",
+      "field": "Computación y Desarrollo de Sistemas",
+      "location": "Santiago, Chile",
+      "start": "2010",
+      "end": "2014",
+      "desc": "Graduada en primer lugar de la promoción. Ganadora de la beca de excelencia académica universitaria durante 4 años consecutivos."
+    }
+  ],
+  "skills": [
+    { "id": "sk-test-1", "name": "Arquitectura Cloud (AWS / GCP)", "level": "5", "category": "Core" },
+    { "id": "sk-test-2", "name": "Kubernetes & Docker", "level": "5", "category": "DevOps" },
+    { "id": "sk-test-3", "name": "JavaScript / TypeScript", "level": "5", "category": "Lenguajes" },
+    { "id": "sk-test-4", "name": "Node.js (NestJS / Express)", "level": "5", "category": "Backend" },
+    { "id": "sk-test-5", "name": "React & Next.js", "level": "4", "category": "Frontend" },
+    { "id": "sk-test-6", "name": "Terraform (IaC)", "level": "4", "category": "DevOps" },
+    { "id": "sk-test-7", "name": "Bases de Datos (PostgreSQL, Redis)", "level": "4", "category": "Datos" },
+    { "id": "sk-test-8", "name": "Metodologías Ágiles (Safe, Scrum)", "level": "5", "category": "Gestión" },
+    { "id": "sk-test-9", "name": "Observabilidad (Grafana, Datadog)", "level": "4", "category": "Operaciones" },
+    { "id": "sk-test-10", "name": "Liderazgo de Equipos y Mentoría", "level": "5", "category": "Soft Skills" }
+  ],
+  "projects": [
+    {
+      "id": "proj-test-1",
+      "name": "FastPay Gateway Core",
+      "role": "Líder de Arquitectura",
+      "link": "https://github.com/sofia-architect/fastpay-core",
+      "stack": "Node.js, Kafka, Redis, PostgreSQL, AWS",
+      "desc": "Sistema centralizado de mensajería transaccional bancaria que procesa transacciones asíncronas con colas de prioridad y reintentos automáticos. Resistencia garantizada ante desconexiones de red externas."
+    },
+    {
+      "id": "proj-test-2",
+      "name": "IaC Global Blueprints",
+      "role": "Creadora & Mantenedora",
+      "link": "https://github.com/sofia-architect/terraform-kubernetes-blueprints",
+      "stack": "Terraform, Helm, Kubernetes",
+      "desc": "Plantillas reutilizables de código abierto para desplegar clústeres de Kubernetes productivos de alta seguridad con monitoreo, ingress controllers y autoescaladores automáticos listos en 5 minutos."
+    },
+    {
+      "id": "proj-test-3",
+      "name": "E-Commerce Recommendation System",
+      "role": "Desarrolladora Cloud Principal",
+      "link": "",
+      "stack": "Python, GCP Vertex AI, BigQuery",
+      "desc": "Pipeline de análisis predictivo que sugiere productos a los clientes de e-commerce basándose en el historial de navegación. Integrado mediante APIs HTTP eficientes en tiempo real."
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert-test-1",
+      "title": "AWS Certified Solutions Architect – Professional",
+      "issuer": "Amazon Web Services (AWS)",
+      "date": "2024",
+      "link": "https://aws.amazon.com/verification"
+    },
+    {
+      "id": "cert-test-2",
+      "title": "Certified Kubernetes Administrator (CKA)",
+      "issuer": "The Linux Foundation (CNCF)",
+      "date": "2023",
+      "link": ""
+    },
+    {
+      "id": "cert-test-3",
+      "title": "Google Cloud Professional Cloud Architect",
+      "issuer": "Google Cloud",
+      "date": "2022",
+      "link": ""
+    }
+  ],
+  "languages": [
+    { "id": "lang-test-1", "name": "Español", "level": "Nativo (Lengua materna)" },
+    { "id": "lang-test-2", "name": "Inglés", "level": "Fluido Profesional (Nivel C2 - TOEFL iBT 112/120)" },
+    { "id": "lang-test-3", "name": "Portugués", "level": "Conversacional Intermedio (Nivel B1)" }
+  ],
+  "custom": {
+    "title": "Voluntariado y Actividades Comunitarias",
+    "items": [
+      {
+        "id": "cust-test-1",
+        "title": "Mentora en Women In Tech (WIT) Chile",
+        "desc": "Realizo mentorías personalizadas de carrera técnica e ingeniería de sistemas a estudiantes universitarias y mujeres que buscan transicionar a la industria tecnológica."
+      },
+      {
+        "id": "cust-test-2",
+        "title": "Co-organizadora del AWS User Group Santiago",
+        "desc": "Coordinación de meetups mensuales gratuitos de la comunidad de AWS para compartir mejores prácticas en computación en la nube y arquitectura de sistemas distribuidos."
+      },
+      {
+        "id": "cust-test-3",
+        "title": "Contribuidora en Proyectos Open Source",
+        "desc": "Contribución periódica de parches, arreglos de bugs y traducción de documentación técnica en repositorios comunitarios de Terraform y Helm."
+      }
+    ]
+  },
+  "settings": {
+    "template": "modern",
+    "font": "font-inter",
+    "accentColor": "#0f766e",
+    "spacing": "space-normal"
+  }
+}
