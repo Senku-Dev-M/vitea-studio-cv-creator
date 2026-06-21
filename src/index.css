@@ -1892,6 +1892,11 @@ button {
     }
 }
 
+/* Base style for mobile view toggle bar on desktop */
+.mobile-view-toggle-bar {
+    display: none;
+}
+
 /* ── Tablets ─────────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
     .app-body {
@@ -1992,12 +1997,6 @@ button {
         max-width: 400px;
     }
 }
-
-/* Base style for mobile view toggle bar on desktop */
-.mobile-view-toggle-bar {
-    display: none;
-}
-
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
     .landing-hero {
