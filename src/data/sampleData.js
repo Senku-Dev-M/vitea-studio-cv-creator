@@ -87,7 +87,7 @@ export const sampleData = {
   ],
   languages: [
     { id: "lang-1", name: "Español", level: "Nativo" },
-    { id: "lang-2", name: "Inglés", level: "Profesional Avanzado (C1)" }
+    { id: "lang-2", name: "Inglés", level: "Avanzado (C1)" }
   ],
   custom: {
     title: "Áreas de Interés y Voluntariado",

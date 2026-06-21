@@ -139,9 +139,20 @@ export default function EditorHeader({
         <button
           className="btn btn-secondary btn-sm"
           onClick={onSaveDraft}
+          title="Guardar borrador"
           aria-label="Guardar borrador"
         >
           <Save size={16} />
+        </button>
+
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={onClearData}
+          title="Limpiar todos los datos"
+          aria-label="Limpiar todos los datos"
+        >
+          <Trash2 size={16} />
+          <span className="hide-mobile">Limpiar Datos</span>
         </button>
 
         <div className="dropdown" ref={dropdownRef}>

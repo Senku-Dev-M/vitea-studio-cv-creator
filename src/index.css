@@ -1999,6 +1999,10 @@ button {
         width: 10px;
         height: 10px;
     }
+
+    .hide-mobile {
+        display: none !important;
+    }
 }
 
 /* ── Small Mobile ────────────────────────────────────────────────────── */

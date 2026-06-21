@@ -65,20 +65,28 @@ export default function LanguagesForm({ cvData, onAddItem, onDeleteItem, onMoveI
                 <input
                   id={`lang-name-${item.id}`}
                   type="text"
-                  value={item.language}
-                  onChange={(e) => onUpdateValue('languages', item.id, 'language', e.target.value)}
+                  value={item.name || ''}
+                  onChange={(e) => onUpdateValue('languages', item.id, 'name', e.target.value)}
                   placeholder="Español"
                 />
               </div>
               <div className="form-group">
                 <label htmlFor={`lang-level-${item.id}`}>Nivel</label>
-                <input
+                <select
                   id={`lang-level-${item.id}`}
-                  type="text"
-                  value={item.level}
+                  value={item.level || ''}
                   onChange={(e) => onUpdateValue('languages', item.id, 'level', e.target.value)}
-                  placeholder="Ej. Nativo, Avanzado (C1)"
-                />
+                >
+                  <option value="">Selecciona un nivel...</option>
+                  <option value="Nativo">Nativo</option>
+                  <option value="Bilingüe">Bilingüe</option>
+                  <option value="Avanzado (C2)">Avanzado (C2)</option>
+                  <option value="Avanzado (C1)">Avanzado (C1)</option>
+                  <option value="Intermedio Alto (B2)">Intermedio Alto (B2)</option>
+                  <option value="Intermedio (B1)">Intermedio (B1)</option>
+                  <option value="Básico (A2)">Básico (A2)</option>
+                  <option value="Básico (A1)">Básico (A1)</option>
+                </select>
               </div>
             </div>
           </div>
