@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Trash2, Plus, FileText } from 'lucide-react';
+import AIEnhancer from '../AIEnhancer';
 
 export default function CustomForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue, onCustomTitleChange }) {
   const [confirmingDelete, setConfirmingDelete] = useState(null);
@@ -88,9 +89,15 @@ export default function CustomForm({ cvData, onAddItem, onDeleteItem, onMoveItem
               <textarea
                 id={`custom-description-${item.id}`}
                 rows={2}
-                value={item.description}
-                onChange={(e) => onUpdateValue('custom', item.id, 'description', e.target.value)}
+                value={item.desc || ''}
+                onChange={(e) => onUpdateValue('custom', item.id, 'desc', e.target.value)}
                 placeholder="Describe esta entrada..."
+              />
+              <AIEnhancer
+                value={item.desc}
+                onChange={(val) => onUpdateValue('custom', item.id, 'desc', val)}
+                fieldName={cvData.custom.title || "Entrada Personalizada"}
+                context={{ title: item.title }}
               />
             </div>
           </div>

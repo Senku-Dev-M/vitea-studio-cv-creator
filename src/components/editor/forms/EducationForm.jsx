@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Trash2, Plus, GraduationCap } from 'lucide-react';
+import AIEnhancer from '../AIEnhancer';
 
 export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue }) {
   const [confirmingDelete, setConfirmingDelete] = useState(null);
@@ -136,6 +137,12 @@ export default function EducationForm({ cvData, onAddItem, onDeleteItem, onMoveI
                 value={item.description}
                 onChange={(e) => onUpdateValue('education', item.id, 'description', e.target.value)}
                 placeholder="Logros académicos, actividades extracurriculares relevantes..."
+              />
+              <AIEnhancer
+                value={item.description}
+                onChange={(val) => onUpdateValue('education', item.id, 'description', val)}
+                fieldName="Descripción adicional de Educación"
+                context={{ degree: item.degree, school: item.institution }}
               />
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Trash2, Plus, FolderGit } from 'lucide-react';
+import AIEnhancer from '../AIEnhancer';
 
 export default function ProjectsForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue }) {
   const [confirmingDelete, setConfirmingDelete] = useState(null);
@@ -98,8 +99,8 @@ export default function ProjectsForm({ cvData, onAddItem, onDeleteItem, onMoveIt
               <input
                 id={`proj-technologies-${item.id}`}
                 type="text"
-                value={item.technologies}
-                onChange={(e) => onUpdateValue('projects', item.id, 'technologies', e.target.value)}
+                value={item.stack || ''}
+                onChange={(e) => onUpdateValue('projects', item.id, 'stack', e.target.value)}
                 placeholder="React, Node.js, Redis"
               />
             </div>
@@ -109,9 +110,15 @@ export default function ProjectsForm({ cvData, onAddItem, onDeleteItem, onMoveIt
               <textarea
                 id={`proj-description-${item.id}`}
                 rows={2}
-                value={item.description}
-                onChange={(e) => onUpdateValue('projects', item.id, 'description', e.target.value)}
+                value={item.desc || ''}
+                onChange={(e) => onUpdateValue('projects', item.id, 'desc', e.target.value)}
                 placeholder="Describe el proyecto, su propósito y tu contribución..."
+              />
+              <AIEnhancer
+                value={item.desc}
+                onChange={(val) => onUpdateValue('projects', item.id, 'desc', val)}
+                fieldName="Descripción de Proyecto"
+                context={{ projectName: item.name, stack: item.stack }}
               />
             </div>
           </div>

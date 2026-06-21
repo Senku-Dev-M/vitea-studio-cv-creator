@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Trash2, Plus, Briefcase } from 'lucide-react';
+import AIEnhancer from '../AIEnhancer';
 
 export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMoveItem, onUpdateValue }) {
   const [confirmingDelete, setConfirmingDelete] = useState(null);
@@ -124,6 +125,12 @@ export default function ExperienceForm({ cvData, onAddItem, onDeleteItem, onMove
                 value={item.description}
                 onChange={(e) => onUpdateValue('experience', item.id, 'description', e.target.value)}
                 placeholder="• Describe tus logros principales usando viñetas para mayor claridad..."
+              />
+              <AIEnhancer
+                value={item.description}
+                onChange={(val) => onUpdateValue('experience', item.id, 'description', val)}
+                fieldName="Logros y Responsabilidades de Experiencia"
+                context={{ role: item.position, company: item.company }}
               />
             </div>
           </div>

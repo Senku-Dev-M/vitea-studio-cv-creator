@@ -25,3 +25,8 @@ dist-ssr
 
 # Test files in root
 test-search*.js
+
+# Environment variables
+.env
+.env.local
+.env.*.local

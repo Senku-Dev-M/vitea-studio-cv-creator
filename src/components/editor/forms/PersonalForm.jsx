@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Image as ImageIcon, X } from 'lucide-react';
+import AIEnhancer from '../AIEnhancer';
 
 export default function PersonalForm({ cvData, onPersonalChange }) {
   const fileInputRef = useRef(null);
@@ -48,6 +49,12 @@ export default function PersonalForm({ cvData, onPersonalChange }) {
             value={cvData.personal.title}
             onChange={(e) => onPersonalChange('title', e.target.value)}
             placeholder="Ej. Desarrollador Full-Stack"
+          />
+          <AIEnhancer
+            value={cvData.personal.title}
+            onChange={(val) => onPersonalChange('title', val)}
+            fieldName="Título Profesional"
+            context={{ name: cvData.personal.name }}
           />
         </div>
       </div>
@@ -166,6 +173,12 @@ export default function PersonalForm({ cvData, onPersonalChange }) {
           value={cvData.personal.summary}
           onChange={(e) => onPersonalChange('summary', e.target.value)}
           placeholder="Describe tu experiencia y objetivos profesionales..."
+        />
+        <AIEnhancer
+          value={cvData.personal.summary}
+          onChange={(val) => onPersonalChange('summary', val)}
+          fieldName="Resumen Profesional"
+          context={{ role: cvData.personal.title }}
         />
       </div>
     </div>
