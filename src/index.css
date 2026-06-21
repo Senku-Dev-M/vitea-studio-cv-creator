@@ -1943,6 +1943,8 @@ button {
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
+        width: max-content;
+        max-width: 90vw;
         background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -1967,6 +1969,7 @@ button {
         color: var(--text-secondary);
         cursor: pointer;
         transition: all var(--transition-fast);
+        white-space: nowrap; /* Evita que el texto de los botones se divida en dos líneas */
     }
 
     .mobile-view-toggle-bar button.active {

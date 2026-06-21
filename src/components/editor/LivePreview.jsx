@@ -35,18 +35,35 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
   const handleZoomOut = () => setZoomPercent(prev => Math.max(prev - 5, 40));
   const handleZoomFit = () => {
     const canvas = canvasRef.current;
-    if (canvas) {
+    if (canvas && canvas.clientWidth > 0) {
       const containerWidth = canvas.clientWidth - 40;
       const docWidth = 794;
-      setZoomPercent(Math.min(Math.floor((containerWidth / docWidth) * 100), 110));
+      setZoomPercent(Math.max(20, Math.min(Math.floor((containerWidth / docWidth) * 100), 110)));
+    } else {
+      setZoomPercent(80); // Default fallback zoom
     }
   };
 
-  // Auto-ajustar zoom al montar
+  // Auto-ajustar zoom al montar y al cambiar de tamaño el contenedor (incluyendo móvil show/hide)
   useEffect(() => {
-    handleZoomFit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const width = entry.contentRect.width || (entry.target && entry.target.clientWidth);
+        if (width > 0) {
+          const containerWidth = width - 40;
+          const docWidth = 794;
+          const fitZoom = Math.max(20, Math.min(Math.floor((containerWidth / docWidth) * 100), 110));
+          setZoomPercent(fitZoom);
+        }
+      }
+    });
+
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, [setZoomPercent]);
 
   // Helper para dar formato HTML a los saltos de línea y viñetas
   const formatTextToHTML = (text) => {
