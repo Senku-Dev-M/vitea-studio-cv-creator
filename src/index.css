@@ -1898,17 +1898,75 @@ button {
         flex-direction: column;
     }
 
+    .app-body.mobile-view-edit .preview-panel {
+        display: none !important;
+    }
+
+    .app-body.mobile-view-preview .editor-panel {
+        display: none !important;
+    }
+
     .editor-panel {
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        max-height: 60vh;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        max-height: 100% !important;
+        height: 100% !important;
+        border-right: none !important;
+        border-bottom: none !important;
+    }
+
+    .editor-form-footer {
+        padding-bottom: 5.5rem !important; /* Espacio para la barra flotante móvil */
     }
 
     .preview-panel {
-        min-height: 500px;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        height: 100% !important;
+        min-height: auto !important;
+    }
+
+    .preview-zoom-bar {
+        bottom: 80px !important;
+    }
+
+    .mobile-view-toggle-bar {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--border-color);
+        padding: 6px;
+        border-radius: 30px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        gap: 4px;
+    }
+
+    .mobile-view-toggle-bar button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        background: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .mobile-view-toggle-bar button.active {
+        background-color: var(--accent);
+        color: #ffffff;
     }
 
     /* Landing Page responsive */
@@ -1933,6 +1991,11 @@ button {
     .hero-visual {
         max-width: 400px;
     }
+}
+
+/* Base style for mobile view toggle bar on desktop */
+.mobile-view-toggle-bar {
+    display: none;
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────────── */

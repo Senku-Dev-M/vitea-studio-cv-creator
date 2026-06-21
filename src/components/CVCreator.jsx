@@ -23,6 +23,8 @@ import {
   Languages,
   FileText,
   CheckCircle2,
+  Edit3,
+  Eye,
 } from "lucide-react";
 
 export default function CVCreator({ initialTemplate, onBackToLanding }) {
@@ -45,6 +47,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
 
   const [activeTab, setActiveTab] = useState("personal");
   const [zoomPercent, setZoomPercent] = useState(85);
+  const [mobileView, setMobileView] = useState("edit");
   const [toast, setToast] = useState({
     message: "",
     isError: false,
@@ -480,7 +483,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
       />
 
       {/* CUERPO CENTRAL: 2 paneles */}
-      <div className="app-body">
+      <div className={`app-body mobile-view-${mobileView}`}>
         {/* Panel del Editor */}
         <div className="editor-panel">
           {/* Pestañas horizontales de pasos */}
@@ -546,6 +549,35 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           zoomPercent={zoomPercent}
           setZoomPercent={setZoomPercent}
         />
+      </div>
+
+      {/* Selector de vista en móviles */}
+      <div className="mobile-view-toggle-bar" role="tablist" aria-label="Selector de vista">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mobileView === 'edit'}
+          className={mobileView === 'edit' ? 'active' : ''}
+          onClick={() => {
+            setMobileView('edit');
+            // Al volver a editar, nos aseguramos que el scroll del formulario empiece arriba
+            const formArea = document.querySelector('.editor-form-area');
+            if (formArea) formArea.scrollTop = 0;
+          }}
+        >
+          <Edit3 size={16} />
+          <span>Editar</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mobileView === 'preview'}
+          className={mobileView === 'preview' ? 'active' : ''}
+          onClick={() => setMobileView('preview')}
+        >
+          <Eye size={16} />
+          <span>Vista Previa</span>
+        </button>
       </div>
 
       {/* Toast de Notificaciones */}
