@@ -1,6 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Globe, ZoomIn, ZoomOut, Maximize, ExternalLink } from 'lucide-react';
 
+const formatDisplayUrl = (url) => {
+  if (!url) return '';
+  let clean = url.replace(/^(https?:\/\/)?(www\.)?/, '');
+  if (clean.endsWith('/')) {
+    clean = clean.slice(0, -1);
+  }
+  if (clean.length > 40) {
+    return clean.substring(0, 37) + '...';
+  }
+  return clean;
+};
+
 export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
   const [cvHeight, setCvHeight] = useState(1122);
   const cvRef = useRef(null);
@@ -176,7 +188,7 @@ export default function LivePreview({ cvData, zoomPercent, setZoomPercent }) {
               {item.link && (
                 <span className="cv-item-date">
                   <a href={item.link} target="_blank" rel="noreferrer" className="cv-project-link">
-                    Ver Proyecto <ExternalLink size={10} />
+                    {formatDisplayUrl(item.link)} <ExternalLink size={10} />
                   </a>
                 </span>
               )}
