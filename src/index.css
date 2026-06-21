@@ -1919,6 +1919,12 @@ button {
         height: 100% !important;
         border-right: none !important;
         border-bottom: none !important;
+        overflow-y: auto !important; /* Permitir scroll de todo el panel en móvil */
+    }
+
+    .editor-form-area {
+        flex: none !important; /* Desactivar flex grow/shrink */
+        overflow-y: visible !important; /* Quitar scroll interno */
     }
 
     .editor-form-footer {

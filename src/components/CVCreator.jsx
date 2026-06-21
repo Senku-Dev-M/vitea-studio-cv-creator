@@ -59,6 +59,14 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
     localStorage.setItem("cv_creator_draft", JSON.stringify(cvData));
   }, [cvData]);
 
+  // --- SCROLL A LA PARTE SUPERIOR AL CAMBIAR DE PESTAÑA O VISTA ---
+  useEffect(() => {
+    const editorPanel = document.querySelector(".editor-panel");
+    const formArea = document.querySelector(".editor-form-area");
+    if (editorPanel) editorPanel.scrollTop = 0;
+    if (formArea) formArea.scrollTop = 0;
+  }, [activeTab, mobileView]);
+
   // --- ACCIONES DE NOTIFICACIÓN (TOAST) ---
   const showToast = (message, isError = false) => {
     setToast({ message, isError, show: true });
@@ -558,12 +566,7 @@ export default function CVCreator({ initialTemplate, onBackToLanding }) {
           role="tab"
           aria-selected={mobileView === 'edit'}
           className={mobileView === 'edit' ? 'active' : ''}
-          onClick={() => {
-            setMobileView('edit');
-            // Al volver a editar, nos aseguramos que el scroll del formulario empiece arriba
-            const formArea = document.querySelector('.editor-form-area');
-            if (formArea) formArea.scrollTop = 0;
-          }}
+          onClick={() => setMobileView('edit')}
         >
           <Edit3 size={16} />
           <span>Editar</span>
